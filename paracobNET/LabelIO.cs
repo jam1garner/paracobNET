@@ -17,7 +17,8 @@ namespace paracobNET
                 {
                     if (splits[0].Substring(0, 2) == "0x")
                         labels.Add(uint.Parse(splits[0].Substring(2), NumberStyles.HexNumber), splits[1]);
-                    else throw new InvalidDataException();
+                    else
+                        throw new InvalidDataException();
                 }
                 catch { Console.WriteLine($"Parse error in {filepath}, \"{line}\""); }
             }

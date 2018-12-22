@@ -19,7 +19,9 @@ namespace paracobNET
 
             uint StructRefOffset = reader.ReadUInt32();
             if (ParamFile.StructOffsets.Contains(StructRefOffset))
+            {
                 ID = (uint)ParamFile.StructOffsets.IndexOf(StructRefOffset);
+            }
             else
             {
                 ID = (uint)ParamFile.StructOffsets.Count;
@@ -72,8 +74,10 @@ namespace paracobNET
         public IParam GetNode(uint hash)
         {
             foreach (var node in Nodes)
+            {
                 if (node.Key.Hash == hash)
                     return node.Value;
+            }
             return null;
         }
     }

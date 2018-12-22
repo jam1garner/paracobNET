@@ -38,13 +38,19 @@ namespace paracobNET
                 using (Reader = new BinaryReader(File.OpenRead(filepath)))
                 {
                     for (int i = 0; i < magic.Length; i++)
+                    {
                         if (Reader.ReadByte() != (byte)magic[i])
+                        {
                             throw new InvalidDataException("File contains an invalid header");
+                        }
+                    }
                     HashTableSize = Reader.ReadUInt32();
                     RefTableSize = Reader.ReadUInt32();
                     DisasmHashTable = new Hash40[HashTableSize / 8];
                     for (int i = 0; i < DisasmHashTable.Length; i++)
+                    {
                         DisasmHashTable[i] = new Hash40(Reader.ReadUInt64());
+                    }
                     StructOffsets = new List<uint>();
                     Reader.BaseStream.Seek(ParamStart, SeekOrigin.Begin);
                     if ((ParamType)Reader.ReadByte() == ParamType.@struct)
@@ -53,7 +59,9 @@ namespace paracobNET
                         Root.Read();
                     }
                     else
+                    {
                         throw new InvalidDataException("File does not have a root");
+                    }
                 }
             }
             finally
